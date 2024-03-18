@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/hello', function () {
-    return ('Rean Laravel');
+
+Route::get('/', function () {
+    return view("Hello");
+});
+
+Route::get("/feed", function (){
+    return view("feed");
+});
+
+Route::get("/profile", function () {
+    return view("profile");
 });
