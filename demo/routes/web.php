@@ -1,16 +1,9 @@
 <?php
 
+use App\Http\Controllers\dashboradConroller;
+use App\Http\Controllers\logic;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view("welcome");
-});
-
-Route::get("/feed", function (){
-    return view("feed");
-});
-
-Route::get("/profile", function () {
-    return view("profile");
-});
+Route::get('/', [dashboradConroller::class, 'index']);
+Route::get('/logic', [logic::class,'logic']);
