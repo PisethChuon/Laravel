@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -10,15 +11,14 @@ class DashboardController extends Controller
     {
         $users = [
             [
-                "name"=> "Alex",
-                "age" => "20",
+                'name' => 'Alex',
+                'age' => 30,
             ],
             [
-                "name"=> "Mac",
-                "age"=> "18",
+                'name' => 'Dan',
+                'age' => 25,
             ]
         ];
-
-        return view('dashbord', ['users' => $users]);
+        return view('dashboard', ['users' => $users]);
     }
 }
