@@ -11,6 +11,10 @@ Route::get('/create', function () {
     return view('create');
 });
 
+Route::get('/details', function () {
+    return view('details');
+});
+
 
 
 
