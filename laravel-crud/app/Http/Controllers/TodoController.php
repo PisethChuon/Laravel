@@ -53,8 +53,12 @@ class TodoController extends Controller
 
     }
     // Function 'delete'
-    public function delete(){
-        // I will write code for deleting a Todo here
+    public function delete(Todo $todo){
+
+        $todo->delete();
+
+        return redirect('/');
+
     }
     // Function 'store' for sending data to the server
 
