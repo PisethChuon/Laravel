@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use App\Models\Student; //add Student Model - Data is coming from the database via Model.
+use App\Models\Student; 
  
 class StudentController extends Controller
 {
