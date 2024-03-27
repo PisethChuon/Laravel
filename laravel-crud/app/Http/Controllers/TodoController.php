@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Validation\ValidatesRequests; 
+
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
+    use ValidatesRequests;
     // Function 'index'
     public function index(){
         $todo = Todo::all();
@@ -17,8 +21,8 @@ class TodoController extends Controller
         return view('create');
     }
     // Function 'Details'
-    public function details(){
-        return view('details');
+    public function details(Todo $todo){
+        return view('details')->with('todos', $todo);
     }
     // Function 'edit'
     public function edit(){
@@ -33,10 +37,32 @@ class TodoController extends Controller
         // I will write code for deleting a Todo here
     }
     // Function 'store' for sending data to the server
+
     public function store(){
-        // I Will write code for storing a data here
+
+
+        try {
+            $this->validate(request(), [
+                'name' => ['required'],
+                'description' => ['required']
+            ]);
+        } catch (ValidationException $e) {
+        }
+
+
+        $data = request()->all();
+
+
+        $todo = new Todo();
+        //On the left is the field name in DB and on the right is field name in Form/view
+        $todo->name = $data['name'];
+        $todo->description = $data['description'];
+        $todo->save();
+
+        session()->flash('success', 'Todo created succesfully');
+
+        return redirect('/');
+
     }
-
-
         
 }
