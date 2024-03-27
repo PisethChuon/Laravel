@@ -62,31 +62,37 @@ class TodoController extends Controller
     }
     // Function 'store' for sending data to the server
 
-    public function store(){
-
-
-        try {
-            $this->validate(request(), [
-                'name' => ['required'],
-                'description' => ['required']
-            ]);
-        } catch (ValidationException $e) {
-        }
-
-
-        $data = request()->all();
-
-
-        $todo = new Todo();
-        //On the left is the field name in DB and on the right is field name in Form/view
-        $todo->name = $data['name'];
-        $todo->description = $data['description'];
-        $todo->save();
-
-        session()->flash('success', 'Todo created succesfully');
-
-        return redirect('/');
-
+    public function store()
+{
+    try {
+        $this->validate(request(), [
+            'name' => ['required'],
+            'description' => ['required']
+        ]);
+    } catch (ValidationException $e) {
+        // Handle validation exception if needed
+        return back()->withErrors($e->validator->errors())->withInput();
     }
+
+    $data = request()->all();
+
+    // Check if 'name' key exists in $data array
+    if (!isset($data['name'])) {
+        // Handle the case where 'name' key is missing
+        // You can redirect back with an error message or handle it as you see fit
+        return back()->with('error', 'Name field is missing')->withInput();
+    }
+
+    $todo = new Todo();
+
+    // Assign values to the model attributes
+    $todo->name = $data['name'];
+    $todo->description = $data['description'];
+    $todo->save();
+
+    session()->flash('success', 'Todo created successfully');
+
+    return redirect('/');
+}
         
 }
