@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Student; // Data in comminf from database via model
 class StudentController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        return view('students.index')->with('students', $students);   
     }
 
     /**
