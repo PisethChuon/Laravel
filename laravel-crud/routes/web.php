@@ -1,10 +1,10 @@
 <?php
-
-use App\Http\Controllers\StudentController;
+ 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StudentController; //add the ControllerNameSpace
+ 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resource('/students', StudentController::class);
+ 
+Route::resource("/student", StudentController::class);
