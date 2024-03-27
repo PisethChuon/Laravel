@@ -29,8 +29,28 @@ class TodoController extends Controller
         return view('edit');
     }
     // Function 'update'
-    public function update(){
-    // I will write code for update a Todo here
+    public function update(Todo $todo){
+
+        try {
+            $this->validate(request(), [
+                'name' => ['required'],
+                'description' => ['required'],
+           
+            ]);
+        } catch (ValidationException $e) {
+        }
+
+        $data = request()->all();
+
+       
+        $todo->name = $data['name'];
+        $todo->description = $data['description'];
+        $todo->save();
+
+        session()->flash('success', 'Todo updated successfully');
+
+        return redirect('/');
+
     }
     // Function 'delete'
     public function delete(){
