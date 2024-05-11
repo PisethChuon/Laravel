@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\NoteController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\RegisterController;
+
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
+Route::get('/', [RegisterController::class, 'register'])->name('register');
 
 // // show
 // Route::get('/note', [NoteController::class, 'index'])->name('note.index');
@@ -19,4 +19,3 @@ Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 // // update with id
 // Route::put('/note/{id}', [NoteController::class, 'update'])->name('note.update');
 
-Route::resource('note', NoteController::class);
